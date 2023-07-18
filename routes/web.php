@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\SetpdfController;
+use App\Http\Controllers\SolicitudCredito;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/',[SetpdfController::class,'pdfgenerate']);
+Route::get('/solicitud',[SolicitudCredito::class,'view']);
+

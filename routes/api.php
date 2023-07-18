@@ -12,6 +12,7 @@ use App\Http\Controllers\NotasController;
 use App\Http\Controllers\NotificacionController;
 use App\Http\Controllers\ResultadoController;
 use App\Http\Controllers\SetpdfController;
+use App\Http\Controllers\SolicitudCredito;
 use App\Http\Controllers\VehiculoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -96,11 +97,14 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/resultado',[ResultadoController::class,'index']);
 
 
-    //pdfs
+    //pdfs cotizacion
     Route::post('/setpedf',[SetpdfController::class,'create']);
     Route::get('/setpedf',[SetpdfController::class,'index']);
     Route::get('/setpedf/asesorio',[SetpdfController::class,'asesorios']);
     Route::post('/pdf/descarga',[SetpdfController::class,'dowload']);
+
+    //pdf solicitud de credito
+    Route::post('/solicitud/credito',[SolicitudCredito::class,'create']);
 
 });
 
