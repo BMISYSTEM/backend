@@ -15,7 +15,7 @@ class SolicitudCredito extends Controller
     }
     public function view()
     {
-        $pdf = Pdf::loadView('welcome', []);
+        $pdf = Pdf::loadView('solicitud', []);
         // $pdf->loadHTML('<h1>Test</h1>');
         return $pdf->stream();
     }

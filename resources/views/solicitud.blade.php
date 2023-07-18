@@ -84,8 +84,11 @@
     .h-10{
         height: 10rem;
     }
+    .h-99{
+        height: 99rem;
+    }
     .h-2{
-        height: 2rem;
+        height: 1rem;
     }
     .h-full{
         height: 100%;
@@ -95,6 +98,8 @@
     }
     .flex{
         display: flex;
+        flex-direction: row;
+        gap:1rem;
     }
     .flex-row{
         flex-direction: row;
@@ -113,7 +118,8 @@
     }
     .border-2{
         border:solid 1px gray;
-        padding: 1rem;
+        padding: 0.2rem;
+        
     }
     .rounded-full{
         border-radius: 100%
@@ -134,7 +140,7 @@
         padding: 0;
     }
     .text-lg{
-        font-size: 20px;
+        font-size: 12px;
         font-weight:bold;
         font-family: sans-serif;
     }
@@ -143,237 +149,274 @@
         color:white;
         padding: 0.5rem;
     }
+    .border-l{
+        border-left: 0;
+        border-bottom: 1px solid black;
+        border-right: 1px solid black;
+        border-top: 1px solid black;
+    }
+    .border-r{
+        border-left: 1px solid black;
+        border-bottom: 1px solid black;
+        border-right: 0px solid black;
+        border-top: 1px solid black;
+    }
+    .border-1-l{
+        border-left:  1px solid gray;
+    }
+    .border-1-t{
+        border-top:  1px solid gray;
+    }
+    .border-1-r{
+        border-right:  1px solid gray;
+    }
+    .border-1-b{
+        border-bottom:  1px solid gray;
+    }
     
 </style>
 <body>
-    {{-- logo --}}
-    <div class="">
-        <h1>imagen de logo</h1>
-    </div>
-    {{-- titulo del pdf  --}}
-    <h1>Solicitud para el estudio de credito persona natural</h1>
-    <div>
-        <p>fecha expediccion</p>
-        <p>No.Solicitud</p>
-    </div>
-    <h2>datos requeridos por los establecimientos de credito y entidades aseguradoras</h2>
-    <div>
-        <p>tipo:</p>
-        <p>Asesor:</p>
-        <p>c.c asesor:</p>
-        <p>vitrina:</p>
-    </div>
-{{-- primer cuadro --}}
-    <h1 class="w-full text-center titulo">Datos del credito</h1>
-    <div class="">
-        <table class="w-full  p-0 m-0">
-            <tbody class="p-0 m-0">
-                <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                    <td class="text-left border-2 w-full h-full text-lg">Marca:</td>
-                    <td class="text-left border-2 w-full h-full text-lg">Valor vehiculo:</td>
-                    <td class="text-left border-2 w-full h-full text-lg">Tipo:</td>
-                </tr>
-                <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                    <td class="text-left border-2 w-full h-full text-lg">Vehiculo:</td>
-                    <td class="text-left border-2 w-full h-full text-lg">Valor Cuota extra:</td>
-                    <td class="text-left border-2 w-full h-full text-lg">Cuota inicial:</td>
-                </tr>
-                <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                    <td class="text-left border-2 w-full h-full text-lg">Valor seguro:</td>
-                    <td class="text-left border-2 w-full h-full text-lg">Valor a financiar:</td>
-                    <td class="text-left border-2 w-full h-full text-lg">Plazo:</td>
-                </tr>
-                <tr class="contenedor-tabla w-full flex items-between m-0  ">
-                    <td class="text-left border-2 w-full h-full text-lg">Plan:</td>
-                    <td class="text-left border-2 w-33 h-full text-lg">Tasa:</td>
-                </tr>
-                <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                    <td class="text-left border-2 w-full h-full text-lg">Financiero:</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-{{-- segundo cuadro --}}
-<h1 class="w-full text-center titulo">Datos Personales del cliente</h1>
-<div class="">
-    <table class="w-full  p-0 m-0">
-        <tbody class="p-0 m-0">
-            <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                <td class="text-left border-2 w-full h-full text-lg">Nombre Completo:</td>
-            </tr>
-            <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                <td class="text-left border-2 w-full h-full text-lg">Fecha Nacimiento:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Tipo de Documento:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Numero de Identificacion:</td>
-            </tr>
-            <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                <td class="text-left border-2 w-full h-full text-lg">Ciudad:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Genero:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Estado Civil:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Fecha de expediccion:</td>
-            </tr>
-            <tr class="contenedor-tabla w-full flex items-between m-0  ">
-                <td class="text-left border-2 w-full h-full text-lg">Direccion:</td>
-                <td class="text-left border-2 w-33 h-full text-lg">Telefono:</td>
-                <td class="text-left border-2 w-33 h-full text-lg">Celular:</td>
-            </tr>
-            <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                <td class="text-left border-2 w-full h-full text-lg">Tipo Vivienda:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Email:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Antiguedad Vivienda:</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-{{-- tercer cuadro --}}
-<h1 class="w-full text-center titulo">Informacion Laboral Cliente</h1>
-<div class="">
-    <table class="w-full  p-0 m-0">
-        <tbody class="p-0 m-0">
-            <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                <td class="text-left border-2 w-full h-full text-lg">Tipo de trabajo:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Profesion:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Nit:</td>
-            </tr>
-            <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                <td class="text-left border-2 w-full h-full text-lg">Empresa:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Antiguedad Laboral:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Telefono:</td>
-            </tr>
-            <tr class="contenedor-tabla w-full flex items-between m-0  ">
-                <td class="text-left border-2 w-33 h-full text-lg">Detalle:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Direccion:</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-{{-- cuarto cuadro --}}
-<h1 class="w-full text-center titulo">Ingresos y Egresos cliente</h1>
-<div class="">
-    <table class="w-full  p-0 m-0">
-        <tbody class="p-0 m-0">
-            <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                <td class="text-left border-2 w-full h-full text-lg">Ingresos fijos:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Ingresos variables:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Otros ingresos:</td>
-            </tr>
-            <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                <td class="text-left border-2 w-full h-full text-lg">Gastos:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Otros Egresos:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Tiene Vehiculo:</td>
-            </tr>
-            <tr class="contenedor-tabla w-full flex items-between m-0  ">
-                <td class="text-left border-2 w-full h-full text-lg">Total Ingresos:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Total Activos:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Total Pasivos:</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-{{-- cuarto cuadro --}}
-<h1 class="w-full text-center titulo">Refrencia Personales</h1>
-<div class="">
-    <table class="w-full  p-0 m-0">
-        <tbody class="p-0 m-0">
-            <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                <td class="text-left border-2 w-full h-full text-lg">Nombre:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Telefono:</td>
-            </tr>
-            <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                <td class="text-left border-2 w-full h-full text-lg">Ciudad:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Direccion:</td>
-            </tr>
-            <tr class="contenedor-tabla w-full flex items-between m-0">
-                <td class=" border-2 w-full h-full text-lg text-center">Refrencia Personal 2</td>
-            </tr>
-            <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                <td class="text-left border-2 w-full h-full text-lg">Nombre:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Telefono:</td>
-            </tr>
-            <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                <td class="text-left border-2 w-full h-full text-lg">Ciudad:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Direccion:</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-{{-- cuarto cuadro --}}
-<h1 class="w-full text-center titulo">Refrencia Familiares</h1>
-<div class="">
-    <table class="w-full  p-0 m-0">
-        <tbody class="p-0 m-0">
-            <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                <td class="text-left border-2 w-full h-full text-lg">Nombre:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Telefono:</td>
-            </tr>
-            <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                <td class="text-left border-2 w-full h-full text-lg">Ciudad:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Direccion:</td>
-            </tr>
-            <tr class="contenedor-tabla w-full flex items-between m-0">
-                <td class=" border-2 w-full h-full text-lg text-center">Refrencia Familiares 2</td>
-            </tr>
-            <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                <td class="text-left border-2 w-full h-full text-lg">Nombre:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Telefono:</td>
-            </tr>
-            <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                <td class="text-left border-2 w-full h-full text-lg">Ciudad:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Direccion:</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-{{-- cuarto cuadro --}}
-<h1 class="w-full text-center titulo">Refrencias Empresariales-Comerciales</h1>
-<div class="">
-    <table class="w-full  p-0 m-0">
-        <tbody class="p-0 m-0">
-            <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                <td class="text-left border-2 w-full h-full text-lg">Nombre:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Nit:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Telefonos:</td>
-            </tr>
-            <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                <td class="text-left border-2 w-full h-full text-lg">Ciudad:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Direccion:</td>
-            </tr>
-            <tr class="contenedor-tabla w-full flex items-between m-0  ">
-                <td class="text-center border-2 w-full h-full text-lg">Referencia 2:</td>
-            </tr>
-            <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                <td class="text-left border-2 w-full h-full text-lg">Nombre:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Nit:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Telefonos:</td>
-            </tr>
-            <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                <td class="text-left border-2 w-full h-full text-lg">Ciudad:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Direccion:</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-{{-- cuarto cuadro --}}
-<h1 class="w-full text-center titulo">Informacion del conyugue</h1>
-<div class="">
-    <table class="w-full  p-0 m-0">
-        <tbody class="p-0 m-0">
-            <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                <td class="text-left border-2 w-full h-full text-lg">Nombre:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Fecha nacimiento:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Cedula:</td>
-            </tr>
-            <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                <td class="text-left border-2 w-full h-full text-lg">Trabaja:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Telefono:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Salario:</td>
-            </tr>
-            <tr class="contenedor-tabla w-full flex items-between m-0 ">
-                <td class="text-left border-2 w-full h-full text-lg">Otros ingresos:</td>
-                <td class="text-left border-2 w-full h-full text-lg">Egresos:</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+            {{-- logo
+            <div class="">
+                <h1>imagen de logo</h1>
+            </div>
+            {{-- titulo del pdf  --}}
+        <div>
+
+                <h1>Solicitud para el estudio de credito persona natural</h1>
+                <div>
+                    <p>fecha expediccion</p>
+                    <p>No.Solicitud</p>
+                </div>
+                <h2>datos requeridos por los establecimientos de credito y entidades aseguradoras</h2>
+                <table class="w-full ">
+                    <tr>
+                        <td>tipo:</td>
+                        <td>Asesor:</td>
+                        <td>c.c asesor:</td>
+                        <td>vitrina:</td>
+                    </tr>
+                </table>
+        
+                <h1 class="w-full text-center titulo">Datos del credito</h1>
+                
+                    <table class="w-full itemns-center text-lg text-center border-none">
+                            <tr class="itemns-center  text-center font-bold">
+                                <td class="text-left border-2 w-full h-2 text-lg">Marca:</td>
+                                <td class="text-left border-2 w-full h-2 text-lg">Valor vehiculo:</td>
+                                <td class="text-left border-2 w-full h-2 text-lg">Tipo:</td>
+                            </tr>
+                        
+                            <tr class="contenedor-tabla w-full  items-between m-0 ">
+                                <td class="text-left border-2 w-full h-2 text-lg">Vehiculo:</td>
+                                <td class="text-left border-2 w-full h-2 text-lg">Valor Cuota extra:</td>
+                                <td class="text-left border-2 w-full h-2 text-lg">Cuota inicial:</td>
+                            </tr>
+                            <tr class="contenedor-tabla w-full  items-between m-0 ">
+                                <td class="text-left border-2 w-full h-2 text-lg">Valor seguro:</td>
+                                <td class="text-left border-2 w-full h-2 text-lg">Valor a financiar:</td>
+                                <td class="text-left border-2 w-full h-2 text-lg">Plazo:</td>
+                            </tr>
+                            <tr class="contenedor-tabla w-full  items-between m-0  ">
+                                <td class="text-left border-2 w-full h-2 text-lg">Plan:</td>
+                                <td class="text-left border-r w-full h-2 text-lg">Tasa:</td>
+                                <td class="text-left border-l w-full h-2 text-lg"></td>
+                            </tr>
+                            <tr class="contenedor-tabla w-full  items-between m-0 ">
+                                <td class="text-left border-r w-full h-2 text-lg">Financiero:</td>
+                                <td class="text-left border-1-t border-1-b w-full h-2 text-lg"></td>
+                                <td class="text-left border-1-t border-1-b border-1-r w-full h-2 text-lg"></td>
+                            </tr>
+                    </table>
+              
+            {{-- segundo cuadro --}}
+            <h1 class="w-full text-center titulo">Datos Personales del cliente</h1>
+            <div class="">
+                <table class="w-full itemns-center text-lg text-center border-none">
+                    <tbody class="p-0 m-0">
+                        <tr class="contenedor-tabla w-full  items-between m-0 ">
+                            <td class="text-left  border-1-t border-1-b border-1-l w-full h-2 text-lg">Nombre Completo:</td>
+                            <td class="text-left  border-1-t border-1-b w-full h-2 text-lg"></td>
+                            <td class="text-left  border-1-t border-1-b w-full h-2 text-lg"></td>
+                            <td class="text-left  border-1-t border-1-b border-1-r w-full h-2 text-lg"></td>
+                        </tr>
+                        <tr class="contenedor-tabla w-full  items-between m-0 ">
+                            <td class="text-left border-1-b border-1-r border-1-l w-full h-2 text-lg">Fecha Nacimiento:</td>
+                            <td class="text-left border-1-b border-1-r  w-full h-2 text-lg">Tipo de Documento:</td>
+                            <td class="text-left border-1-b w-full h-2 text-lg">Numero de Identificacion:</td>
+                            <td class="text-left border-1-b border-1-r   w-full h-2 text-lg"></td>
+                        </tr>
+                        <tr class="contenedor-tabla w-full  items-between m-0 ">
+                            <td class="text-left border-1-b border-1-l border-1-r w-full h-2 text-lg">Ciudad:</td>
+                            <td class="text-left border-1-b border-1-l border-1-r w-full h-2 text-lg">Genero:</td>
+                            <td class="text-left border-1-b border-1-l border-1-r w-full h-2 text-lg">Estado Civil:</td>
+                            <td class="text-left border-1-b border-1-l border-1-r w-full h-2 text-lg">Fecha de expediccion:</td>
+                        </tr>
+                        <tr class="contenedor-tabla w-full  items-between m-0  ">
+                            <td class="text-left border-1-b border-1-l border-1-r w-full h-2 text-lg">Direccion:</td>
+                            <td class="text-left border-1-b border-1-l border-1-r w-33 h-2 text-lg">Telefono:</td>
+                            <td class="text-left border-1-b border-1-l  w-33 h-2 text-lg">Celular:</td>
+                            <td class="text-left border-1-b border-1-r w-33 h-2 text-lg"></td>
+                        </tr>
+                        <tr class="contenedor-tabla w-full  items-between m-0 ">
+                            <td class="text-left w-full h-2 border-1-b border-1-r border-1-l text-lg">Tipo Vivienda:</td>
+                            <td class="text-left w-full h-2 border-1-b border-1-r border-1-l text-lg">Email:</td>
+                            <td class="text-left w-full h-2 border-1-b  border-1-l text-lg">Antiguedad Vivienda:</td>
+                            <td class="text-left w-full h-2 border-1-b border-1-r  text-lg"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            {{-- tercer cuadro --}}
+            {{-- <h1 class="w-full text-center titulo">Informacion Laboral Cliente</h1>
+            <div class="">
+                <table class="w-full  p-0 m-0">
+                    <tbody class="p-0 m-0">
+                        <tr class="contenedor-tabla w-full flex items-between m-0 ">
+                            <td class="text-left border-2 w-full h-full text-lg">Tipo de trabajo:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Profesion:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Nit:</td>
+                        </tr>
+                        <tr class="contenedor-tabla w-full flex items-between m-0 ">
+                            <td class="text-left border-2 w-full h-full text-lg">Empresa:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Antiguedad Laboral:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Telefono:</td>
+                        </tr>
+                        <tr class="contenedor-tabla w-full flex items-between m-0  ">
+                            <td class="text-left border-2 w-33 h-full text-lg">Detalle:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Direccion:</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> --}}
+            {{-- cuarto cuadro --}}
+            {{-- <h1 class="w-full text-center titulo">Ingresos y Egresos cliente</h1>
+            <div class="">
+                <table class="w-full  p-0 m-0">
+                    <tbody class="p-0 m-0">
+                        <tr class="contenedor-tabla w-full flex items-between m-0 ">
+                            <td class="text-left border-2 w-full h-full text-lg">Ingresos fijos:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Ingresos variables:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Otros ingresos:</td>
+                        </tr>
+                        <tr class="contenedor-tabla w-full flex items-between m-0 ">
+                            <td class="text-left border-2 w-full h-full text-lg">Gastos:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Otros Egresos:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Tiene Vehiculo:</td>
+                        </tr>
+                        <tr class="contenedor-tabla w-full flex items-between m-0  ">
+                            <td class="text-left border-2 w-full h-full text-lg">Total Ingresos:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Total Activos:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Total Pasivos:</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> --}}
+            {{-- cuarto cuadro --}}
+            {{-- <h1 class="w-full text-center titulo">Refrencia Personales</h1>
+            <div class="">
+                <table class="w-full  p-0 m-0">
+                    <tbody class="p-0 m-0">
+                        <tr class="contenedor-tabla w-full flex items-between m-0 ">
+                            <td class="text-left border-2 w-full h-full text-lg">Nombre:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Telefono:</td>
+                        </tr>
+                        <tr class="contenedor-tabla w-full flex items-between m-0 ">
+                            <td class="text-left border-2 w-full h-full text-lg">Ciudad:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Direccion:</td>
+                        </tr>
+                        <tr class="contenedor-tabla w-full flex items-between m-0">
+                            <td class=" border-2 w-full h-full text-lg text-center">Refrencia Personal 2</td>
+                        </tr>
+                        <tr class="contenedor-tabla w-full flex items-between m-0 ">
+                            <td class="text-left border-2 w-full h-full text-lg">Nombre:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Telefono:</td>
+                        </tr>
+                        <tr class="contenedor-tabla w-full flex items-between m-0 ">
+                            <td class="text-left border-2 w-full h-full text-lg">Ciudad:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Direccion:</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> --}}
+            {{-- cuarto cuadro --}}
+            {{-- <h1 class="w-full text-center titulo">Refrencia Familiares</h1>
+            <div class="">
+                <table class="w-full  p-0 m-0">
+                    <tbody class="p-0 m-0">
+                        <tr class="contenedor-tabla w-full flex items-between m-0 ">
+                            <td class="text-left border-2 w-full h-full text-lg">Nombre:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Telefono:</td>
+                        </tr>
+                        <tr class="contenedor-tabla w-full flex items-between m-0 ">
+                            <td class="text-left border-2 w-full h-full text-lg">Ciudad:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Direccion:</td>
+                        </tr>
+                        <tr class="contenedor-tabla w-full flex items-between m-0">
+                            <td class=" border-2 w-full h-full text-lg text-center">Refrencia Familiares 2</td>
+                        </tr>
+                        <tr class="contenedor-tabla w-full flex items-between m-0 ">
+                            <td class="text-left border-2 w-full h-full text-lg">Nombre:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Telefono:</td>
+                        </tr>
+                        <tr class="contenedor-tabla w-full flex items-between m-0 ">
+                            <td class="text-left border-2 w-full h-full text-lg">Ciudad:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Direccion:</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> --}}
+            {{-- cuarto cuadro --}}
+            {{-- <h1 class="w-full text-center titulo">Refrencias Empresariales-Comerciales</h1>
+            <div class="">
+                <table class="w-full  p-0 m-0">
+                    <tbody class="p-0 m-0">
+                        <tr class="contenedor-tabla w-full flex items-between m-0 ">
+                            <td class="text-left border-2 w-full h-full text-lg">Nombre:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Nit:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Telefonos:</td>
+                        </tr>
+                        <tr class="contenedor-tabla w-full flex items-between m-0 ">
+                            <td class="text-left border-2 w-full h-full text-lg">Ciudad:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Direccion:</td>
+                        </tr>
+                        <tr class="contenedor-tabla w-full flex items-between m-0  ">
+                            <td class="text-center border-2 w-full h-full text-lg">Referencia 2:</td>
+                        </tr>
+                        <tr class="contenedor-tabla w-full flex items-between m-0 ">
+                            <td class="text-left border-2 w-full h-full text-lg">Nombre:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Nit:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Telefonos:</td>
+                        </tr>
+                        <tr class="contenedor-tabla w-full flex items-between m-0 ">
+                            <td class="text-left border-2 w-full h-full text-lg">Ciudad:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Direccion:</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> --}}
+            {{-- cuarto cuadro --}}
+            {{-- <h1 class="w-full text-center titulo">Informacion del conyugue</h1>
+            <div class="">
+                <table class="w-full  p-0 m-0">
+                    <tbody class="p-0 m-0">
+                        <tr class="contenedor-tabla w-full flex items-between m-0 ">
+                            <td class="text-left border-2 w-full h-full text-lg">Nombre:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Fecha nacimiento:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Cedula:</td>
+                        </tr>
+                        <tr class="contenedor-tabla w-full flex items-between m-0 ">
+                            <td class="text-left border-2 w-full h-full text-lg">Trabaja:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Telefono:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Salario:</td>
+                        </tr>
+                        <tr class="contenedor-tabla w-full flex items-between m-0 ">
+                            <td class="text-left border-2 w-full h-full text-lg">Otros ingresos:</td>
+                            <td class="text-left border-2 w-full h-full text-lg">Egresos:</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> --}}
+        </div>
 </body>
 </html>
