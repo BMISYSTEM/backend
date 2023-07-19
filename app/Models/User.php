@@ -25,8 +25,9 @@ class User extends Authenticatable
         'date',
         'cedula',
         'empresas',
-        'img'
-        ,'rol'
+        'img',
+        'rol',
+
 
     ];
 

@@ -162,7 +162,8 @@ class ClienteController extends Controller
             c.estados,
             c.users_id,
              e.id as estados_id, e.estado, e.created_at, e.updated_at,
-             t.comentario,t.fecha as fecha
+             t.comentario,t.fecha as fecha,
+             e.color as color
              from clientes c
             inner join users u on c.users_id = u.id
             inner join empresas em on u.empresas = em.id

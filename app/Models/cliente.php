@@ -18,7 +18,16 @@ class cliente extends Model
         'telefono',
         'email',
         'estados',
-        'users_id'
+        'users_id',
+        'TIPO_DOCUMENTO',
+        'FECHA_EXPEDICCION',
+        'ciudad',
+        'genero',
+        'estado_civil',
+        'direccion',
+        'celular',
+        'tipo_vivienda',
+        'antiguedad_vivienda',
     ];
 
 

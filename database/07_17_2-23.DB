@@ -133,3 +133,61 @@ create table referencias (
 	PRIMARY KEY (id),
 	FOREIGN KEY (clientes) REFERENCES clientes(id)
 )
+
+--tabla de pdf solicitud
+
+create table pdfsolicitud (
+	id int NOT NULL AUTO_INCREMENT,
+	clientes bigint unsigned not null,
+	users bigint unsigned not null,
+	PRIMARY KEY (id),
+	FOREIGN KEY (clientes) REFERENCES clientes(id)
+	FOREIGN KEY (users) REFERENCES users(id)
+)
+
+--relacion tabla datos_credito y pdfsolicitud
+
+alter table datos_credito 
+add pdf int not null,
+add FOREIGN KEY (pdf) REFERENCES pdfsolicitud(id)
+
+
+--relacion tabla informacion_laboral y pdfsolicitud
+
+alter table informacion_laboral 
+add pdf int not null,
+add FOREIGN KEY (pdf) REFERENCES pdfsolicitud(id)
+
+
+--relacion tabla ingresos_egresos y pdfsolicitud
+
+alter table ingresos_egresos 
+add pdf int not null,
+add FOREIGN KEY (pdf) REFERENCES pdfsolicitud(id)
+
+--relacion tabla referencias y pdfsolicitud
+
+alter table referencias 
+add pdf int not null,
+add FOREIGN KEY (pdf) REFERENCES pdfsolicitud(id)
+
+--se le cambia el nombre a la tabla 
+
+rename table pdfsolicitud to pdfsolicitudes
+
+--se aegrega la columna updated_at a pdfsolicitudes
+
+alter table pdfsolicitudes 
+add column updated_at TIMESTAMP
+
+alter table pdfsolicitudes 
+add column created_at TIMESTAMP
+
+--se renombra la tabla 
+rename table datos_credito to datos_creditos 
+
+alter table datos_creditos 
+add column updated_at TIMESTAMP
+
+alter table datos_creditos 
+add column created_at TIMESTAMP

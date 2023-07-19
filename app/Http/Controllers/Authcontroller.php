@@ -191,11 +191,16 @@ class Authcontroller extends Controller
     //activasion de usuarios
     public function ActivaUser(Request $request)
     {
+
         $permisos = User::where('id',$request['id'])->get();
         $permisos->toQuery()->update([
             'activo' => 1,
            ]
         );
         return 'Actualizado...';
+    }
+    public function user()
+    {
+        return response()->json(Auth::user()->rol);
     }
 }

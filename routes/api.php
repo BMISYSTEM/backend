@@ -105,6 +105,10 @@ Route::middleware('auth:sanctum')->group(function(){
 
     //pdf solicitud de credito
     Route::post('/solicitud/credito',[SolicitudCredito::class,'create']);
+    Route::get('/solicitud/index',[SolicitudCredito::class,'index']);
+
+    //roles
+    Route::get('/users/rol',[Authcontroller::class,'user']);
 
 });
 
