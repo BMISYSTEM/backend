@@ -61,15 +61,19 @@ class SetpdfController extends Controller
             'modelo'=>$request['financiero_vehiculo_modelo_nombre'],
         ]);
         $asesorios = $request['financiero_asesorios'];
-        foreach($asesorios as $asesorio){
-            pdfasesorios::create([
-                'setpdf'=>$llave,
-                'nombre'=>$asesorio['nombre'],
-                'marca'=>$asesorio['marca'],
-                'estado'=>$asesorio['estado'],
-                'valor'=>$asesorio['valor'],
-            ]);
+        if($asesorios)
+        {
+            foreach($asesorios as $asesorio){
+                pdfasesorios::create([
+                    'setpdf'=>$llave,
+                    'nombre'=>$asesorio['nombre'],
+                    'marca'=>$asesorio['marca'],
+                    'estado'=>$asesorio['estado'],
+                    'valor'=>$asesorio['valor'],
+                ]);
+            }
         }
+        
         $documento = pdfdocumento::create([
             'setpdf'=>$llave,
             'cedula'=>$request['documentacion_cedula'],

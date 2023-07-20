@@ -26,15 +26,15 @@
     }
     .contenedor-imagen{
         width: 100%;
-        width: auto;
+        height: auto;
         text-align: center;
         padding: 10px;
     }
     .img-vehiculo{
-        width: auto;
-        height: auto;
-        max-width: 30rem;
-        max-height: 30rem;
+        width: 20rem;
+        height: 20rem;
+        max-width: 25rem;
+        max-height: 25rem;
         margin: 0 auto;
         border-radius: 10px;
     }
@@ -108,6 +108,9 @@
     .rounded-full{
         border-radius: 100%
     }
+    .page-break {
+    page-break-after: always;
+    }
 </style>
 <body class="pdf">
     
@@ -120,8 +123,19 @@
         <h1 class="text-center font-bold"><?php echo e($empresa); ?></h1>
     </div>
     <div class="contenedor-imagen">
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                         <img class="img-vehiculo" src=<?php echo e(public_path('/storage/vehiculos/'.$foto)); ?> alt="">
+                    </td>
+                    <td>
+                        <img class="img-vehiculo" src=<?php echo e(public_path('/storage/vehiculos/'.$foto)); ?> alt="">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         
-        <img class="img-vehiculo" src=<?php echo e(public_path('/storage/vehiculos/'.$foto)); ?> alt="">
     </div>
     
     <div class="contenedor-tabla">
@@ -158,14 +172,22 @@
                 </tr>
             </thead>
             <tbody >
-                <?php $__currentLoopData = $asesorios; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $asesorio): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                     <tr class="itemns-center rounded-sm bg-slate-200 text-center mt-2 p-1">
-                        <td ><?php echo e($asesorio['nombre']); ?></td>
-                        <td ><?php echo e($asesorio['marca']); ?></td>
-                        <td ><?php echo e($asesorio['estado']); ?></td>
-                        <td ><?php echo e($asesorio['valor']); ?></td>
+                <?php if($asesorios): ?>
+                    <?php $__currentLoopData = $asesorios; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $asesorio): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <tr class="itemns-center rounded-sm bg-slate-200 text-center mt-2 p-1">
+                            <td ><?php echo e($asesorio['nombre']); ?></td>
+                            <td ><?php echo e($asesorio['marca']); ?></td>
+                            <td ><?php echo e($asesorio['estado']); ?></td>
+                            <td ><?php echo e($asesorio['valor']); ?></td>
+                        </tr>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <?php else: ?>
+                    <tr>
+                        <td>Sin Asesorios registrados</td>
                     </tr>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                <?php endif; ?>
+               
             </tbody>
         </table>
     </div>
@@ -214,6 +236,7 @@
             <p>Certificado de tradiccion</p>
         <?php endif; ?>
     </div>
+    <div class="page-break"></div>   
     <h1 class="text-center w-full font-bold">Matricula (costos)</h1>
     <div class="w-full text-center border-2 rounded-xl">
         <p>TRASPASO: <?php echo e($traspasos); ?></p>
@@ -223,31 +246,36 @@
         <p>CERTIFICADO DE TRADICCION: <?php echo e($certificadotradiccion); ?></p>
         <p>SIGIN/PERITAJE: <?php echo e($siginperitaje); ?></p>
     </div>
-    <h1 class="text-center w-full font-bold">Retoma</h1>
-    <div class="w-full text-center border-2 rounded-xl">
-        <?php if($placaretoma): ?>
-        <p>PLACA: <?php echo e($placaretoma); ?></p>
-        <?php endif; ?>
-        <?php if($marcaretoma): ?>
-        <p>MARCA: <?php echo e($marcaretoma); ?></p>
-        <?php endif; ?>
-        <?php if($refvehiculo): ?>
-        <p>REFERENCIA: <?php echo e($refvehiculo); ?></p>
-        <?php endif; ?>
-        <?php if($modeloretoma): ?>
-        <p>MODELO: <?php echo e($modeloretoma); ?></p>
-        <?php endif; ?>
-        <?php if($kilometrajeretoma): ?>
-        <p>KILOMETRAJE: <?php echo e($kilometrajeretoma); ?></p>
-        <?php endif; ?>
-        <?php if($valorretoma): ?>
-        <p>VALOR: <?php echo e($valorretoma); ?></p>
-        <?php endif; ?>
-        <?php if($descripcionretoma): ?>
-        <p>DESCRIPCION: <?php echo e($descripcionretoma); ?></p>
-        <?php endif; ?>
+    <p class="text-1-sm text-center">Desarrollado Por CartMots/SYPRODS</p>
+     
+    <?php if($placaretoma<> '-' OR $marcaretoma <> '-' OR $refvehiculo <> '-' OR $modeloretoma <> '-' OR $kilometrajeretoma <> '-' OR $valorretoma <> '-' OR $descripcionretoma <> '-'): ?>
         
-    </div>
+        <h1 class="text-center w-full font-bold">Retoma</h1>
+        <div class="w-full text-center border-2 rounded-xl">
+            <?php if($placaretoma): ?>
+            <p>PLACA: <?php echo e($placaretoma); ?></p>
+            <?php endif; ?>
+            <?php if($marcaretoma): ?>
+            <p>MARCA: <?php echo e($marcaretoma); ?></p>
+            <?php endif; ?>
+            <?php if($refvehiculo): ?>
+            <p>REFERENCIA: <?php echo e($refvehiculo); ?></p>
+            <?php endif; ?>
+            <?php if($modeloretoma): ?>
+            <p>MODELO: <?php echo e($modeloretoma); ?></p>
+            <?php endif; ?>
+            <?php if($kilometrajeretoma): ?>
+            <p>KILOMETRAJE: <?php echo e($kilometrajeretoma); ?></p>
+            <?php endif; ?>
+            <?php if($valorretoma): ?>
+            <p>VALOR: <?php echo e($valorretoma); ?></p>
+            <?php endif; ?>
+            <?php if($descripcionretoma): ?>
+            <p>DESCRIPCION: <?php echo e($descripcionretoma); ?></p>
+            <?php endif; ?>
+            
+        </div>
+    <?php endif; ?>
     <div class="text-sm ">
         <p>
             <img class="img-ico" src=<?php echo e(public_path('/storage/docpdf/user.png')); ?> alt="">

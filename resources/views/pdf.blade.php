@@ -26,15 +26,15 @@
     }
     .contenedor-imagen{
         width: 100%;
-        width: auto;
+        height: auto;
         text-align: center;
         padding: 10px;
     }
     .img-vehiculo{
-        width: auto;
-        height: auto;
-        max-width: 30rem;
-        max-height: 30rem;
+        width: 20rem;
+        height: 20rem;
+        max-width: 25rem;
+        max-height: 25rem;
         margin: 0 auto;
         border-radius: 10px;
     }
@@ -108,20 +108,38 @@
     .rounded-full{
         border-radius: 100%
     }
+    .page-break {
+    page-break-after: always;
+    }
+    .text-xl{
+        font-size: 20px;
+    }
 </style>
 <body class="pdf">
     {{-- asi se recibe una variable --}}
     {{-- {{$datos}} --}}
     <div>
         <h1 class="titulo-cartmots">CARTSMOT-PDF-00001</h1>
+        <h1 class="w-full text-center text-xl">Cotizacion</h1>
     </div>
     <div class="footer">
         <p>{{$fecha}}</p>
         <h1 class="text-center font-bold">{{$empresa}}</h1>
     </div>
     <div class="contenedor-imagen">
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                         <img class="img-vehiculo" src={{public_path('/storage/vehiculos/'.$foto)}} alt="">
+                    </td>
+                    <td>
+                        {{-- <img class="img-vehiculo" src={{public_path('/storage/vehiculos/'.$foto)}} alt=""> --}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         {{-- cambiar la imagen por el vehiculo seleccionado --}}
-        <img class="img-vehiculo" src={{public_path('/storage/vehiculos/'.$foto)}} alt="">
     </div>
     
     <div class="contenedor-tabla">
@@ -158,14 +176,22 @@
                 </tr>
             </thead>
             <tbody >
-                @foreach ($asesorios as $asesorio )
-                     <tr class="itemns-center rounded-sm bg-slate-200 text-center mt-2 p-1">
-                        <td >{{$asesorio['nombre']}}</td>
-                        <td >{{$asesorio['marca']}}</td>
-                        <td >{{$asesorio['estado']}}</td>
-                        <td >{{$asesorio['valor']}}</td>
+                @if($asesorios)
+                    @foreach ($asesorios as $asesorio )
+                            <tr class="itemns-center rounded-sm bg-slate-200 text-center mt-2 p-1">
+                            <td >{{$asesorio['nombre']}}</td>
+                            <td >{{$asesorio['marca']}}</td>
+                            <td >{{$asesorio['estado']}}</td>
+                            <td >{{$asesorio['valor']}}</td>
+                        </tr>
+                    @endforeach
+                    @else
+                    <tr>
+                        <td>Sin Asesorios registrados</td>
                     </tr>
-                @endforeach
+
+                @endif
+               
             </tbody>
         </table>
     </div>
@@ -214,6 +240,7 @@
             <p>Certificado de tradiccion</p>
         @endif
     </div>
+    <div class="page-break"></div>   
     <h1 class="text-center w-full font-bold">Matricula (costos)</h1>
     <div class="w-full text-center border-2 rounded-xl">
         <p>TRASPASO: {{$traspasos}}</p>
@@ -223,31 +250,36 @@
         <p>CERTIFICADO DE TRADICCION: {{$certificadotradiccion}}</p>
         <p>SIGIN/PERITAJE: {{$siginperitaje}}</p>
     </div>
-    <h1 class="text-center w-full font-bold">Retoma</h1>
-    <div class="w-full text-center border-2 rounded-xl">
-        @if ($placaretoma)
-        <p>PLACA: {{$placaretoma}}</p>
-        @endif
-        @if ($marcaretoma)
-        <p>MARCA: {{$marcaretoma}}</p>
-        @endif
-        @if ($refvehiculo)
-        <p>REFERENCIA: {{$refvehiculo}}</p>
-        @endif
-        @if ($modeloretoma)
-        <p>MODELO: {{$modeloretoma}}</p>
-        @endif
-        @if ($kilometrajeretoma)
-        <p>KILOMETRAJE: {{$kilometrajeretoma}}</p>
-        @endif
-        @if ($valorretoma)
-        <p>VALOR: {{$valorretoma}}</p>
-        @endif
-        @if ($descripcionretoma)
-        <p>DESCRIPCION: {{$descripcionretoma}}</p>
-        @endif
+    <p class="text-1-sm text-center">Desarrollado Por CartMots/SYPRODS</p>
+     
+    @if ($placaretoma<> '-' OR $marcaretoma <> '-' OR $refvehiculo <> '-' OR $modeloretoma <> '-' OR $kilometrajeretoma <> '-' OR $valorretoma <> '-' OR $descripcionretoma <> '-')
         
-    </div>
+        <h1 class="text-center w-full font-bold">Retoma</h1>
+        <div class="w-full text-center border-2 rounded-xl">
+            @if ($placaretoma)
+            <p>PLACA: {{$placaretoma}}</p>
+            @endif
+            @if ($marcaretoma)
+            <p>MARCA: {{$marcaretoma}}</p>
+            @endif
+            @if ($refvehiculo)
+            <p>REFERENCIA: {{$refvehiculo}}</p>
+            @endif
+            @if ($modeloretoma)
+            <p>MODELO: {{$modeloretoma}}</p>
+            @endif
+            @if ($kilometrajeretoma)
+            <p>KILOMETRAJE: {{$kilometrajeretoma}}</p>
+            @endif
+            @if ($valorretoma)
+            <p>VALOR: {{$valorretoma}}</p>
+            @endif
+            @if ($descripcionretoma)
+            <p>DESCRIPCION: {{$descripcionretoma}}</p>
+            @endif
+            
+        </div>
+    @endif
     <div class="text-sm ">
         <p>
             <img class="img-ico" src={{public_path('/storage/docpdf/user.png')}} alt="">

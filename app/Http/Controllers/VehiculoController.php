@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Vehiculos;
 use App\Http\Resources\VehiculosResource;
 use App\Models\vehiculo;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Exists;
 use Mockery\Undefined;
@@ -20,9 +21,11 @@ class VehiculoController extends Controller
         $foto3 ='';
         $foto4 ='';
         $peritaje ='';
+        $dt = new DateTime();
+
         if($_FILES){
             if (isset($_FILES['foto1'])) {
-                $foto1 =$_FILES['foto1']['name']['archivo'];
+                $foto1 =$dt->format('Y_m_d_H_i_s').str_replace(' ','-',$_FILES['foto1']['name']['archivo']);
                 // $ruta = $_SERVER['DOCUMENT_ROOT']."";
                 $ruta = $_SERVER['DOCUMENT_ROOT']."/storage/vehiculos/";
                 $archivotmp = $_FILES['foto1']['tmp_name']['archivo'];
@@ -32,7 +35,7 @@ class VehiculoController extends Controller
                 // $archivotmp->store();
             }
             if (isset($_FILES['foto2']) ) {
-                $foto2 =$_FILES['foto2']['name']['archivo'];
+                $foto2 =$dt->format('Y_m_d_H_i_s').str_replace(' ','_',$_FILES['foto2']['name']['archivo']);
                 // $ruta = $_SERVER['DOCUMENT_ROOT']."";
                 $ruta = $_SERVER['DOCUMENT_ROOT']."/storage/vehiculos/";
                 $archivotmp = $_FILES['foto2']['tmp_name']['archivo'];
@@ -42,7 +45,7 @@ class VehiculoController extends Controller
                 // $archivotmp->store();
             }
             if (isset($_FILES['foto3'])) {
-                $foto3 =$_FILES['foto3']['name']['archivo'];
+                $foto3 =$dt->format('Y_m_d_H_i_s').str_replace(' ','_',$_FILES['foto3']['name']['archivo']);
                 // $ruta = $_SERVER['DOCUMENT_ROOT']."";
                 $ruta = $_SERVER['DOCUMENT_ROOT']."/storage/vehiculos/";
                 $archivotmp = $_FILES['foto3']['tmp_name']['archivo'];
@@ -52,7 +55,7 @@ class VehiculoController extends Controller
                 // $archivotmp->store();
             }
             if (isset($_FILES['foto4'])) {
-                $foto4 =$_FILES['foto4']['name']['archivo'];
+                $foto4 =$dt->format('Y_m_d_H_i_s').str_replace(' ','_',$_FILES['foto4']['name']['archivo']);
                 // $ruta = $_SERVER['DOCUMENT_ROOT']."";
                 $ruta = $_SERVER['DOCUMENT_ROOT']."/storage/vehiculos/";
                 $archivotmp = $_FILES['foto4']['tmp_name']['archivo'];
@@ -62,7 +65,7 @@ class VehiculoController extends Controller
                 // $archivotmp->store();
             }
             if (isset($_FILES['peritaje'])) {
-                $peritaje =$_FILES['peritaje']['name']['archivo'];
+                $peritaje =$dt->format('Y_m_d_H_i_s').str_replace(' ','_',$_FILES['peritaje']['name']['archivo']);
                 // $ruta = $_SERVER['DOCUMENT_ROOT']."";
                 $ruta = $_SERVER['DOCUMENT_ROOT']."/storage/peritaje/";
                 $archivotmp = $_FILES['peritaje']['tmp_name']['archivo'];
