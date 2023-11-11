@@ -27,6 +27,10 @@ class AsesoriosRequest extends FormRequest
             'estados'=>['required'],
             'descripcion'=>['required'],
             'valor'=>['required'],
+            'foto1' => ['required','max:5000'],
+            'foto2' => ['required','max:5000'],
+            'foto3' => ['required','max:5000'],
+
         ];
     }
     public function messages()

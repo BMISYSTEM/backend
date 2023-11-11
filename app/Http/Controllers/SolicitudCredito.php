@@ -34,6 +34,7 @@ class SolicitudCredito extends Controller
         $usuariocedula = Auth::user()->cedula;
         $fotousuario = Auth::user()->img;
         $usuarioempresa = Auth::user()->empresa;
+        $empresa = Auth::user()->empresas;
         $telefono= cliente::find($request['cliente'])->celular;
         $fecha = now();
         $nombrepdf= $dt->format('Y_m_d_H_i_s').str_replace(' ','-','Solicitud_credito_'.$telefono).'.pdf';
@@ -41,7 +42,8 @@ class SolicitudCredito extends Controller
         $pdfsolicitud = pdfsolicitude::create([
             'clientes'=>$request['cliente'],
             'nombre'=>$nombrepdf,
-            'users'=>$users
+            'users'=>$users,
+            'empresas'=>$empresa
         ]);
 
         $datos_del_credito = datos_credito::create([
@@ -58,7 +60,8 @@ class SolicitudCredito extends Controller
             'plazo'=>$request['plazo'],
             'tasa'=>$request['tasa'],
             'financiera'=>$request['Financiera'],
-            'pdf'=>$pdfsolicitud['id']
+            'pdf'=>$pdfsolicitud['id'],
+            'empresas'=>$empresa
         ]);
         // actualiza los datos del cliente
         //condicionar a que si no vienen estos datos sacar error y no dejar generar el pdf
@@ -91,6 +94,7 @@ class SolicitudCredito extends Controller
             'telefono'=>$request['telefono'],
             'antiguedad'=>$request['antiguedad'],
             'pdf'=>$pdfsolicitud['id'],
+            'empresas'=>$empresa
         ]);
 
         // creacion de ingreso y egreso
@@ -106,6 +110,7 @@ class SolicitudCredito extends Controller
             'tiene_vehiculo'=>$request['tienevehiculo'],
             'total_pasivos'=>$request['totalpasivos'],
             'pdf'=>$pdfsolicitud['id'],
+            'empresas'=>$empresa
         ]);
 
         // Referencias
@@ -147,6 +152,7 @@ class SolicitudCredito extends Controller
             'conyuge_otros_ingreso'=>$request['conyugeotrosingresos'],
             'conyuge_egresos'=>$request['conyugeegresos'],
             'pdf'=>$pdfsolicitud['id'],
+            'empresas'=>$empresa
         ]);
             
         // CREA EL PDF

@@ -22,7 +22,7 @@ class Modelos extends FormRequest
     public function rules(): array
     {
         return [
-            'year' => ['required','unique:modelos,year']
+            'year' => ['required']
         ];
     }
     public function messages()

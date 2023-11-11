@@ -12,6 +12,7 @@ class notificacion extends Model
     protected $fillable = [
         'user_id',
         'mensaje',
-        'visto'
+        'visto',
+        'empresas'
     ];
 }

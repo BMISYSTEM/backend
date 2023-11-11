@@ -14,5 +14,6 @@ class setpdf extends Model
         'clientes',
         'users',
         'pdf'
+        ,'empresas'
     ];
 }

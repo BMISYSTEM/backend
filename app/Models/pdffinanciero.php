@@ -26,5 +26,6 @@ class pdffinanciero extends Model
         'foto',
         'marca',
         'modelo'
+        ,'empresas'
     ];
 }

@@ -24,5 +24,6 @@ class pdfdocumento extends Model
         'resolucionpension',
         'desprendibles',
         'certificadotradiccion',
+        'empresas'
     ];
 }

@@ -13,6 +13,8 @@ class estado extends Model
         'color',
         'pendiente',
         'empresas',
+        'aprobado',
+        'rechazado'
     ];
     
 }

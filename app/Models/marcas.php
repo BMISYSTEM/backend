@@ -9,7 +9,8 @@ class marcas extends Model
 {
     use HasFactory;
     protected $fillable=[
-        'nombre'
+        'nombre',
+        'empresas'
     ];
 
     public function vehiculos()

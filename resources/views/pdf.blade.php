@@ -56,6 +56,9 @@
     .w-33{
         width: 33%;
     }
+    .w-1-2{
+        width: 40%;
+    }
     .w-10{
         width: 10rem;
     }
@@ -96,11 +99,18 @@
     .flex-row{
         flex-direction: row;
     }
+    .flex-col{
+        flex-direction:column;
+    }
     .grid{
         display: grid;
     }
     .grid-template-col-3{
         grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .grid-template-col-1{
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        gap:1rem;
     }
     .border-2{
         border:solid 2px gray;
@@ -119,7 +129,7 @@
     {{-- asi se recibe una variable --}}
     {{-- {{$datos}} --}}
     <div>
-        <h1 class="titulo-cartmots">CARTSMOT-PDF-00001</h1>
+        <h1 class="titulo-cartmots">CARTSMOT-PDF</h1>
         <h1 class="w-full text-center text-xl">Cotizacion</h1>
     </div>
     <div class="footer">
@@ -131,15 +141,22 @@
             <tbody>
                 <tr>
                     <td>
-                         <img class="img-vehiculo" src={{public_path('/storage/vehiculos/'.$foto)}} alt="">
+                         <img class="img-vehiculo" src={{public_path($foto1)}} alt="">
                     </td>
-                    <td>
-                        {{-- <img class="img-vehiculo" src={{public_path('/storage/vehiculos/'.$foto)}} alt=""> --}}
+                    <td class="grid grid-template-col-1">
+                        <div class="w-full">
+                            <img class="w-1-2" src={{public_path($foto2)}} alt="">
+                        </div>
+                        <div class="w-full">
+                            <img class="w-1-2" src={{public_path($foto3)}} alt="">
+                        </div>
+                        <div class="w-full">
+                            <img class="w-1-2" src={{public_path($foto4)}} alt="">
+                        </div>
                     </td>
                 </tr>
             </tbody>
         </table>
-        {{-- cambiar la imagen por el vehiculo seleccionado --}}
     </div>
     
     <div class="contenedor-tabla">

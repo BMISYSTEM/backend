@@ -9,7 +9,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
 use App\Http\Resources\clientesResource;
+use App\Models\clientes_documento;
+use App\Models\empresa;
 use App\Models\notificacion;
+use Illuminate\Support\Facades\Storage;
 
 class ClienteController extends Controller
 {
@@ -17,6 +20,8 @@ class ClienteController extends Controller
     public function create(Clientes $request){
         $vehiculo = $request->validated();
         $user= Auth::user()->id;
+        $empresa = Auth::user()->empresas;
+
         $email = '';
         if($vehiculo['email'])
         {
@@ -34,7 +39,8 @@ class ClienteController extends Controller
             'telefono' => $vehiculo['telefono'],
             'email' => $email,
             'estados'=>'1',
-            'users_id'=> $user
+            'users_id'=> $user,
+            'empresas'=>$empresa
         ]);
         return $creado;
     }
@@ -71,7 +77,6 @@ class ClienteController extends Controller
         $update->toQuery()->update([
             'estados' => $estado
         ]);
-
         $mensaje = 'El cliente '. $request['user_name']. ' cambio de estado a '.$request['nombre_estado'];
         $notificacion = notificacion::create([
             'user_id' => $request['user'],
@@ -118,12 +123,41 @@ class ClienteController extends Controller
     }
     // trae la informacion de seguimiento del asesor si es 0 trae solo la de el y si es 1 consulta todo de la empresa
     public function seguimiento()
-    {
+    {   
+        $inicio = $_GET['inicio'];
+        $fin =$_GET['fin'];
         $rol = Auth::user()->rol;
         $user = Auth::user()->id;
         $empresa = Auth::user()->empresas;
+        // super administrador
         if($rol == 1)
         {
+            $vista = DB::select("
+            select 
+            c.id as cliente_id, 
+            c.nombre,
+            c.apellido,
+            c.cedula,
+            c.date,
+            c.telefono,
+            c.email,
+            c.estados,
+            c.users_id,
+            u.name,
+            u.img,
+             e.id as estados_id, e.estado, e.created_at, e.updated_at,e.pendiente,e.aprobado,e.rechazado,
+             t.comentarios as comentario,t.fecha as fecha,
+             e.color as color
+             from clientes c
+            inner join users u on c.users_id = u.id
+            inner join empresas em on u.empresas = em.id
+            inner join estados e on e.id = c.estados
+            left join (SELECT max(created_at) as ultima_nota,clientes as clientes FROM notas GROUP BY clientes ) as ult on c.id = ult.clientes
+            left join (select proximo_seguimiento fecha,clientes clientes,comentario comentarios,created_at as ult_nota from notas GROUP BY clientes,proximo_seguimiento,comentario,created_at order by proximo_seguimiento desc) as t  on t.clientes = c.id and ult.ultima_nota = t.ult_nota
+            where em.id= '".$empresa."' and c.transferido = 0 and c.created_at BETWEEN '".$inicio."' AND '".$fin."'
+            group by u.name,u.img,c.id,t.comentarios,t.clientes,c.nombre,c.apellido,c.cedula,c.date,c.telefono,c.email,c.estados,c.users_id,e.id,e.estado,e.created_at,e.updated_at,t.fecha,e.color,e.pendiente,e.aprobado,e.rechazado
+            ORDER BY  fecha DESC");
+        }else{
 
             $vista = DB::select("
             select 
@@ -136,59 +170,160 @@ class ClienteController extends Controller
             c.email,
             c.estados,
             c.users_id,
-             e.id as estados_id, e.estado, e.created_at, e.updated_at,
-             t.comentario,t.fecha as fecha,
+            u.name,
+            u.img,
+            e.id as estados_id, e.estado, e.created_at, e.updated_at,e.pendiente,e.aprobado,e.rechazado,
+             t.comentarios as comentario,t.fecha as fecha,
              e.color as color
              from clientes c
             inner join users u on c.users_id = u.id
             inner join empresas em on u.empresas = em.id
             inner join estados e on e.id = c.estados
-            left join
-            (select max(n.fecha) as fecha,clientes,max(comentario) as comentario from (select proximo_seguimiento fecha,clientes,comentario from notas GROUP BY clientes,proximo_seguimiento,comentario)as n GROUP BY n.clientes) as t  on t.clientes = c.id 
-            where em.id= '".$empresa."'
-            group by c.id,t.comentario,t.clientes,c.nombre,c.apellido,c.cedula,c.date,c.telefono,c.email,c.estados,c.users_id,e.id,e.estado,e.created_at,e.updated_at,t.fecha
-            ORDER BY  fecha DESC");
-        }else{
-
-            $vista = DB::select("
-            select 
-            c.id as cliente_id, 
-            c.nombre, 
-            c.apellido, 
-            c.cedula, 
-            c.date, 
-            c.telefono,
-            c.email,
-            c.estados,
-            c.users_id,
-             e.id as estados_id, e.estado, e.created_at, e.updated_at,
-             t.comentario,t.fecha as fecha,
-             e.color as color
-             from clientes c
-            inner join users u on c.users_id = u.id
-            inner join empresas em on u.empresas = em.id
-            inner join estados e on e.id = c.estados
-            left join
-            (select max(n.fecha) as fecha,clientes,max(comentario) as comentario from (select proximo_seguimiento fecha,clientes,comentario from notas GROUP BY clientes,proximo_seguimiento,comentario)as n GROUP BY n.clientes) as t  on t.clientes = c.id 
-            where em.id= '".$empresa."' and u.id = '".$user."'
-            group by c.id,t.comentario,t.clientes,c.nombre,c.apellido,c.cedula,c.date,c.telefono,c.email,c.estados,c.users_id,e.id,e.estado,e.created_at,e.updated_at,t.fecha
+            left join (SELECT max(created_at) as ultima_nota,clientes as clientes FROM notas GROUP BY clientes ) as ult on c.id = ult.clientes
+            left join (select proximo_seguimiento fecha,clientes clientes,comentario comentarios,created_at as ult_nota from notas GROUP BY clientes,proximo_seguimiento,comentario,created_at order by proximo_seguimiento desc) as t  on t.clientes = c.id and ult.ultima_nota = t.ult_nota
+            where em.id= '".$empresa."' and u.id = ".$user." and c.transferido = 0 and c.created_at BETWEEN '".$inicio."' AND '".$fin."'
+            group by u.name,u.img,c.id,t.comentarios,t.clientes,c.nombre,c.apellido,c.cedula,c.date,c.telefono,c.email,c.estados,c.users_id,e.id,e.estado,e.created_at,e.updated_at,t.fecha,e.color,e.pendiente,e.aprobado,e.rechazado
             ORDER BY  fecha DESC");
         }
         return response()->json($vista);
         // comentario de prueba
     }
-    public function busqueda()
+    public function seguimiento_centro()
     {
+        $rol = Auth::user()->rol;
+        $user = Auth::user()->id;
+        $empresa = Auth::user()->empresas;
+        $vista = DB::select("
+        select 
+        c.id as cliente_id, 
+        c.nombre,
+        c.apellido,
+        c.cedula,
+        c.date,
+        c.telefono,
+        c.email,
+        c.estados,
+        c.users_id,
+         e.id as estados_id, e.estado, e.created_at, e.updated_at,
+         t.comentarios as comentario,t.fecha as fecha,
+         e.color as color
+         from clientes c
+        inner join users u on c.users_id = u.id
+        inner join empresas em on u.empresas = em.id
+        inner join estados e on e.id = c.estados
+        inner join clientes_documentos cd on c.id = cd.cliente and em.id = cd.empresa
+        left join (SELECT max(created_at) as ultima_nota,clientes as clientes FROM notas GROUP BY clientes ) as ult on c.id = ult.clientes
+        left join (select proximo_seguimiento fecha,clientes clientes,comentario comentarios,created_at as ult_nota from notas GROUP BY clientes,proximo_seguimiento,comentario,created_at order by proximo_seguimiento desc) as t  on t.clientes = c.id and ult.ultima_nota = t.ult_nota
+        where 	em.id= ".$empresa."
+        		and cd.centrofinanciero = '1'
+        group by c.id,t.comentarios,t.clientes,c.nombre,c.apellido,c.cedula,c.date,c.telefono,c.email,c.estados,c.users_id,e.id,e.estado,e.created_at,e.updated_at,t.fecha,e.color
+        ORDER BY  fecha DESC");
+
+        return response()->json($vista);
+        // comentario de prueba
+    }
+    public function busqueda()
+    {   
+        $empresa = Auth::user()->empresas;
         $telefono = $_GET['telefono'];
         $email = $_GET['email'];
-        $result = DB::select("select * from clientes where telefono = ".$telefono. " or email = '".$email."'" );
+        // valida que venga el telefono pero no el email
+        if($telefono  and !$email)
+        {
+           $result = DB::select("select * from clientes c inner join users u on c.users_id = u.id 
+            inner join empresas e on u.empresas = e.id
+            where c.telefono = ".$telefono. " and e.id = ". $empresa ); 
+        }elseif(!$telefono  and $email)
+        {   //valida que venga el email pero el telefono no
+            $result = DB::select("select * from clientes c inner join users u on c.users_id = u.id 
+            inner join empresas e on u.empresas = e.id
+            where c.email = '".$email. "' and e.id = ". $empresa ); 
+        }elseif($telefono  and $email)
+        {  //Si viene tanto email como telefono 
+            $result = DB::select("select * from clientes c inner join users u on c.users_id = u.id 
+            inner join empresas e on u.empresas = e.id
+            where c.email = '".$email. "' and c.telefono = ".$telefono. " and e.id = ". $empresa ); 
+        }
+        
         if($result){
             return response()->json($result);
         }else{
             return '0';
         }
-       
     }
- 
+
+    // administrara los documentos que lleguen de cada cliente
+    public function documentos(Request $request) 
+    {
+        // usuario el cual esta cargando el documento
+        $user = Auth::user()->id;
+        $empresa = Auth::user()->empresas;
+        // capturo el documento que viene en un formdata
+        $documento = $request->file('documento')->store('public/documentos');
+        //extraigo la url del documento para guardarlo en la base de datos
+        $urdocumento = Storage::url($documento);
+        // campturamos tipo y el cliente al cual pertenece el documento
+        $cliente = $request['cliente'];
+        $tipo = $request['tipo'];
+
+        $docbd = clientes_documento::create([
+            'usuario' => $user,
+            'cliente' => $cliente,
+            'empresa' => $empresa,
+            'urldoc'  => $urdocumento,
+            'tipo'    => $tipo,
+            'centrofinanciero'  => $request['centro']
+        ]);
+        return response()->json($docbd);
+    }
+    // retorno de lista de documentos del cliente
+    public function documentosall()
+    {
+        $empresa = Auth::user()->empresas;
+        $cliente = $_GET['id'];
+        $documentos = DB::select('select * from clientes_documentos where cliente = '. $cliente .' and empresa = '. $empresa . ' ;');
+        return response()->json($documentos);
+    }
+    // ediccion de informacion del cliente
+    public function updateCliente (Request $request) 
+    {   
+        $empresas = Auth::user()->empresas;
+        $mensaje = '';
+        $request->validate(
+            [
+                'telefono' => 'required|numeric',
+            ],
+            [
+                'telefono.required' => 'El telefono es obligatorio',
+                'telefono.numeric' => 'El telefono debe ser numerico',
+            ]
+        );
+        // Se consulta que el numero que se esta tratando de asignar no exista dentro de la misma empresa, para evitar colapsos dentro de la integridad del dato
+        $repeatcliente = DB::select('SELECT COUNT(*) as rp FROM clientes WHERE telefono = ' . $request['telefono'] . ' AND empresas = ' . $empresas);
+        $cliente = cliente::find($request['id']);
+        if( $cliente['telefono'] <> $request['telefono'] ){
+
+            if ($repeatcliente[0]->rp == 0 ){
+                
+                $cliente->nombre = $request['nombre'];
+                $cliente->apellido = $request['apellido'];
+                $cliente->cedula = $request['cedula'];
+                $cliente->telefono = $request['telefono'];
+                $cliente->email = $request['email'];
+                $cliente->save();
+                $mensaje = 'Cliente actualizado';
+            }else{
+                $mensaje = 'El Numero que desea establecer se encuentra en uso';
+            }
+        }else{
+            $cliente->nombre = $request['nombre'];
+            $cliente->apellido = $request['apellido'];
+            $cliente->cedula = $request['cedula'];
+            $cliente->email = $request['email'];
+            $cliente->save();
+            $mensaje = 'Cliente actualizado';
+        }
+        return response()->json(['Update' => $mensaje]);
+    }
  }
 

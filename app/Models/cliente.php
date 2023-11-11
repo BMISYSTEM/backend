@@ -28,6 +28,7 @@ class cliente extends Model
         'celular',
         'tipo_vivienda',
         'antiguedad_vivienda',
+        'empresas'
     ];
 
 

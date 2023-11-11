@@ -24,6 +24,7 @@ class datos_credito extends Model
         'tasa',
         'financiera',
         'pdf'
+        ,'empresas'
         
     ];
 }

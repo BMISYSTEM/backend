@@ -20,6 +20,7 @@ class Permisos extends Model
         'transferencias',
         'proveedor',
         'user_id'
+        ,'empresas'
     ];
 
 

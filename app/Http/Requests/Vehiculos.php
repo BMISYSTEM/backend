@@ -29,9 +29,12 @@ class Vehiculos extends FormRequest
             'kilometraje' => ['required'],
             'valor' => ['required'],
             'descripcion' => ['required'],
+            'foto1' => ['required','max:5000'],
+            'foto2' => ['required','max:5000'],
+            'foto3' => ['required','max:5000'],
+            'foto4' => ['required','max:5000'],
         ];
     }
-
     public function messages()
     {
         return [
@@ -42,6 +45,22 @@ class Vehiculos extends FormRequest
             'kilometraje.required' => ['el kilometraje es requerido'],
             'valor.required' => ['el valor es requerido'],
             'descripcion.required' => ['la descripcion es requerida'],
+            'foto1.required' =>['No se envio la imagen 1'],
+            'foto2.required' =>['No se envio la imagen 2'],
+            'foto3.required' =>['No se envio la imagen 3'],
+            'foto4.required' =>['No se envio la imagen 4'],
+            'foto1.image'=>['el archivo no corresponde a una imagen validad imagen1'],
+            'foto2.image'=>['el archivo no corresponde a una imagen validad imagen2'],
+            'foto3.image'=>['el archivo no corresponde a una imagen validad imagen3'],
+            'foto4.image'=>['el archivo no corresponde a una imagen validad imagen4'],
+            'foto1.mimes'=>['la imagen1 no tiene un formato valido para la carga'],
+            'foto2.mimes'=>['la imagen2 no tiene un formato valido para la carga'],
+            'foto3.mimes'=>['la imagen3 no tiene un formato valido para la carga'],
+            'foto4.mimes'=>['la imagen4 no tiene un formato valido para la carga'],
+            'foto1.max'=>['la imagen1 supera eltamaño permitido 5 mp'],
+            'foto2.max'=>['la imagen2 supera eltamaño permitido 5 mp'],
+            'foto3.max'=>['la imagen3 supera eltamaño permitido 5 mp'],
+            'foto4.max'=>['la imagen4 supera eltamaño permitido 5 mp'],
         ];
     }
 }

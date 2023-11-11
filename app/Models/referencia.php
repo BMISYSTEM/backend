@@ -45,7 +45,8 @@ class referencia extends Model
         'coyuge_salario',
         'conyuge_otros_ingreso',
         'conyuge_egresos',
-        'pdf',
+        'pdf'
+        ,'empresas'
 
         
     ];

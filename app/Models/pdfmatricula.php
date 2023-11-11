@@ -16,6 +16,7 @@ class pdfmatricula extends Model
         'impuestos',
         'pignoracion',
         'certificadotradiccion',
-        'siginperitaje',
+        'siginperitaje'
+        ,'empresas'
     ];
 }

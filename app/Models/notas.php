@@ -13,9 +13,9 @@ class notas extends Model
         'comentario',
         'proximo_seguimiento',
         'hora',
-        'estados',
-        'resultado'
+        'estados'
         ,'users',
         'clientes'
+        ,'empresas'
     ];
 }

@@ -22,7 +22,7 @@ class Clientes extends FormRequest
     public function rules(): array
     {
         return [
-            'telefono'=>['required','numeric','unique:clientes,telefono'],
+            'telefono'=>['required','numeric'],
             'email'=>['nullable'],
             'nombre'=>['nullable'],
             'apellido'=>['nullable'],
@@ -35,7 +35,6 @@ class Clientes extends FormRequest
     {
         return [
             'telefono.required'=>'debe ingresar un telefono',
-            'telefono.unique'=>'el telefono ya esta registrado',
             'telefono.numeric'=>'debe ingresar un telefono valido',
         ];
     }

@@ -1,41 +1,39 @@
 
 
 
-//modificaciones tabla cliente 
 
-tipo de documento 
-ALTER TABLE clientes ADD TIPO_DOCUMENTO VARCHAR(255)
+ALTER TABLE clientes ADD TIPO_DOCUMENTO VARCHAR(255);
 
+alter table notas add COLUMN hora time;
+alter table notas drop COLUMN resultado;
 
-FECHA DE EXPREDICCION
-ALTER TABLE clientes ADD FECHA_EXPEDICCION DATE
-
-
-ciudad 
-alter table clientes add ciudad varchar(255)
+ALTER TABLE clientes ADD FECHA_EXPEDICCION DATE;
 
 
-genero 
-alter table clientes add genero varchar(255)
+
+alter table clientes add ciudad varchar(255);
 
 
-estado civil 
-alter table clientes add estado_civil varchar(255)
+
+alter table clientes add genero varchar(255);
 
 
-direccion 
-alter table clientes add direccion varchar(255)
 
-celular
-alter table clientes add celular varchar(255)
+alter table clientes add estado_civil varchar(255);
 
-tipo_vivienda
-alter table clientes add tipo_vivienda varchar(255)
 
-antiguedad en vivienda 
-alter table clientes add antiguedad_vivienda integer
 
-//tabla datos del credito
+alter table clientes add direccion varchar(255);
+
+
+alter table clientes add celular varchar(255);
+
+alter table clientes add tipo_vivienda varchar(255);
+
+ 
+alter table clientes add antiguedad_vivienda integer;
+
+
 
     create table datos_credito (
         id int NOT NULL AUTO_INCREMENT,
@@ -54,9 +52,9 @@ alter table clientes add antiguedad_vivienda integer
         financiera varchar(255),
         PRIMARY KEY (id),
         FOREIGN KEY (clientes) REFERENCES clientes(id)
-    )
+    );
 
-//informacion_laboral
+
 
 create table informacion_laboral (
 	id int not null AUTO_INCREMENT,
@@ -70,10 +68,8 @@ create table informacion_laboral (
 	antiguedad int,
 	PRIMARY KEY (id),
 	FOREIGN KEY (clientes) REFERENCES clientes(id)
-	)
+	);
 
-
-//ingresos y egresos 
 
 create table ingresos_egresos (
 	id int not null AUTO_INCREMENT,
@@ -89,9 +85,9 @@ create table ingresos_egresos (
 	total_pasivos varchar(255),
 	PRIMARY KEY (id),
 	FOREIGN KEY (clientes) REFERENCES clientes(id)
-)
+);
 
-//refrencias 
+
 
 create table referencias (
 	id int NOT NULL AUTO_INCREMENT,
@@ -132,9 +128,9 @@ create table referencias (
 	conyuge_egresos varchar(255),
 	PRIMARY KEY (id),
 	FOREIGN KEY (clientes) REFERENCES clientes(id)
-)
+);
 
---tabla de pdf solicitud
+
 
 create table pdfsolicitud (
 	id int NOT NULL AUTO_INCREMENT,
@@ -143,51 +139,73 @@ create table pdfsolicitud (
 	PRIMARY KEY (id),
 	FOREIGN KEY (clientes) REFERENCES clientes(id)
 	FOREIGN KEY (users) REFERENCES users(id)
-)
+);
 
---relacion tabla datos_credito y pdfsolicitud
+
 
 alter table datos_credito 
 add pdf int not null,
-add FOREIGN KEY (pdf) REFERENCES pdfsolicitud(id)
+add FOREIGN KEY (pdf) REFERENCES pdfsolicitud(id);
 
 
---relacion tabla informacion_laboral y pdfsolicitud
+
 
 alter table informacion_laboral 
 add pdf int not null,
-add FOREIGN KEY (pdf) REFERENCES pdfsolicitud(id)
+add FOREIGN KEY (pdf) REFERENCES pdfsolicitud(id);
 
 
---relacion tabla ingresos_egresos y pdfsolicitud
+
 
 alter table ingresos_egresos 
 add pdf int not null,
-add FOREIGN KEY (pdf) REFERENCES pdfsolicitud(id)
+add FOREIGN KEY (pdf) REFERENCES pdfsolicitud(id);
 
---relacion tabla referencias y pdfsolicitud
+
 
 alter table referencias 
 add pdf int not null,
-add FOREIGN KEY (pdf) REFERENCES pdfsolicitud(id)
+add FOREIGN KEY (pdf) REFERENCES pdfsolicitud(id);
 
---se le cambia el nombre a la tabla 
 
-rename table pdfsolicitud to pdfsolicitudes
 
---se aegrega la columna updated_at a pdfsolicitudes
+rename table pdfsolicitud to pdfsolicitudes;
+alter table estados add COLUMN empresas bigint unsigned
+ALTER TABLE estados ADD CONSTRAINT empresas FOREIGN KEY(empresas) REFERENCES empresas(id);
 
-alter table pdfsolicitudes 
-add column updated_at TIMESTAMP
 
 alter table pdfsolicitudes 
-add column created_at TIMESTAMP
+add column updated_at TIMESTAMP;
 
---se renombra la tabla 
-rename table datos_credito to datos_creditos 
+alter table pdfsolicitudes 
+add column created_at TIMESTAMP;
+
+
+rename table datos_credito to datos_creditos;
 
 alter table datos_creditos 
-add column updated_at TIMESTAMP
+add column updated_at TIMESTAMP;
 
 alter table datos_creditos 
-add column created_at TIMESTAMP
+add column created_at TIMESTAMP;
+
+alter table estados ADD COLUMN pendiente varchar(255);
+alter table pdfsolicitudes add column nombre varchar(255)
+
+alter table informacion_laborales 
+add column updated_at TIMESTAMP;
+
+alter table informacion_laborales 
+add column created_at TIMESTAMP;
+
+alter table ingresos_egresos 
+add column updated_at TIMESTAMP;
+
+alter table ingresos_egresos 
+add column created_at TIMESTAMP;
+
+alter table referencias 
+add column updated_at TIMESTAMP;
+
+alter table referencias 
+add column created_at TIMESTAMP;

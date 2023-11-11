@@ -4,52 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AsesoriosRequest;
 use App\Models\asesorio;
+use App\Models\empresa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class AsesorioController extends Controller
 {
     public function create(AsesoriosRequest $request)
     {
         $asesorios = $request->validated();
-        $foto1 ='';
-        $foto2 ='';
-        $foto3 ='';
-        
-        if($_FILES){
-            if (isset($_FILES['foto1'])) {
-                $foto1 =$_FILES['foto1']['name']['archivo'];
-                // $ruta = $_SERVER['DOCUMENT_ROOT']."";
-                $ruta = $_SERVER['DOCUMENT_ROOT']."/storage/asesorios/";
-                $archivotmp = $_FILES['foto1']['tmp_name']['archivo'];
-                // $nombreURL = $archivotmp->store('imagenes');
-                $datos = (move_uploaded_file($archivotmp,$ruta.$foto1));
-                
-                // $archivotmp->store();
-            }
-            if (isset($_FILES['foto2']) ) {
-                $foto2 =$_FILES['foto2']['name']['archivo'];
-                // $ruta = $_SERVER['DOCUMENT_ROOT']."";
-                $ruta = $_SERVER['DOCUMENT_ROOT']."/storage/asesorios/";
-                $archivotmp = $_FILES['foto2']['tmp_name']['archivo'];
-                // $nombreURL = $archivotmp->store('imagenes');
-                $datos = (move_uploaded_file($archivotmp,$ruta.$foto2));
-                
-                // $archivotmp->store();
-            }
-            if (isset($_FILES['foto3'])) {
-                $foto3 =$_FILES['foto3']['name']['archivo'];
-                // $ruta = $_SERVER['DOCUMENT_ROOT']."";
-                $ruta = $_SERVER['DOCUMENT_ROOT']."/storage/asesorios/";
-                $archivotmp = $_FILES['foto3']['tmp_name']['archivo'];
-                // $nombreURL = $archivotmp->store('imagenes');
-                $datos = (move_uploaded_file($archivotmp,$ruta.$foto3));
-                
-                // $archivotmp->store();
-            }
-        }
-
-
+        $empresa = Auth::user()->empresas;
+        $nomempresa = empresa::find($empresa);
+        // capturar y mover archivos
+        $foto1 = $request ->file('foto1')->store('public/'.$nomempresa['nombre'].'/asesorios');
+        $foto1url = Storage::url($foto1);
+        $foto2 = $request ->file('foto2')->store('public/'.$nomempresa['nombre'].'/asesorios');
+        $foto2url = Storage::url($foto2);
+        $foto3 = $request ->file('foto3')->store('public/'.$nomempresa['nombre'].'/asesorios');
+        $foto3url = Storage::url($foto3);
         $asesorio = asesorio::create(
             [
             'nombre'=> $asesorios['nombre'],
@@ -57,9 +31,10 @@ class AsesorioController extends Controller
             'estados'=> $asesorios['estados'],
             'descripcion'=> $asesorios['descripcion'],
             'valor'=> $asesorios['valor'],
-            'foto1'=>$foto1,
-            'foto2'=>$foto2,
-            'foto3'=>$foto3,
+            'foto1'=>$foto1url,
+            'foto2'=>$foto2url,
+            'foto3'=>$foto3url,
+            'empresas' =>$empresa
             ]
         );
         return 'se creo de forma correcta';

@@ -17,6 +17,7 @@ class pdfretoma extends Model
         'modelo',
         'kilometraje',
         'valorcomercial',
-        'descripcion',
+        'descripcion'
+        ,'empresas'
     ];
 }

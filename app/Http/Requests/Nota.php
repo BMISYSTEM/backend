@@ -26,7 +26,7 @@ class Nota extends FormRequest
             'proximo' => ['required'],
             'hora' => ['required'],
             'estado' => ['required'],
-            'resultado' => ['required'],
+            // 'resultado' => ['required'],
             'cliente' => ['required'],
         ];
     }
@@ -37,7 +37,7 @@ class Nota extends FormRequest
             'proximo.required'=>'la fecha del proximo seguimiento es requerida',
             'proximo.required'=>'la hora del proximo seguimiento es requerida',
             'estado.required'=>'El estado es requerido',
-            'resultado.required'=>'El resultado es requerido',
+            // 'resultado.required'=>'El resultado es requerido',
             'cliente.required'=>'El cliente es requerido',
         ];
     }

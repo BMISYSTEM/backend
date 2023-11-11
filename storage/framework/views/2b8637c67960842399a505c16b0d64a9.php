@@ -111,12 +111,16 @@
     .page-break {
     page-break-after: always;
     }
+    .text-xl{
+        font-size: 20px;
+    }
 </style>
 <body class="pdf">
     
     
     <div>
         <h1 class="titulo-cartmots">CARTSMOT-PDF-00001</h1>
+        <h1 class="w-full text-center text-xl">Cotizacion</h1>
     </div>
     <div class="footer">
         <p><?php echo e($fecha); ?></p>
@@ -130,7 +134,7 @@
                          <img class="img-vehiculo" src=<?php echo e(public_path('/storage/vehiculos/'.$foto)); ?> alt="">
                     </td>
                     <td>
-                        <img class="img-vehiculo" src=<?php echo e(public_path('/storage/vehiculos/'.$foto)); ?> alt="">
+                        
                     </td>
                 </tr>
             </tbody>

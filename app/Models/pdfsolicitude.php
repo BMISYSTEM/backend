@@ -12,7 +12,8 @@ class pdfsolicitude extends Model
     protected $fillable = [
         'clientes',
         'nombre',
-        'users',
+        'users'
+        ,'empresas'
         
     ];
 }

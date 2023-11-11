@@ -22,9 +22,12 @@ class Estados extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre' => ['required','unique:estados,estado'],
+            'nombre' => ['required'],
             'color'=> ['required'],
             'pendiente'=> ['required'],
+            'aprobado'=> ['required'],
+            'rechazado'=> ['required'],
+
         ];
     }
     public function messages()

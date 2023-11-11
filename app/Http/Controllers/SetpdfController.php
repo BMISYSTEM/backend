@@ -13,6 +13,7 @@ use App\Models\pdfdocumento;
 use App\Models\pdfmatricula;
 use Illuminate\Http\Request;
 use App\Models\pdffinanciero;
+use App\Models\vehiculo;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
@@ -30,14 +31,18 @@ class SetpdfController extends Controller
         $usuarioapellido = Auth::user()->apellido;
         $fotousuario = Auth::user()->img;
         $usuarioempresa = Auth::user()->empresa;
+        $empresa = Auth::user()->empresas;
         $nombre_cliente= cliente::find($request['cliente'])->nombre;
         $fecha = now();
+        $vehiculo = vehiculo::find($request['financiero_vehiculo_id']);//datos del vehiculo de la base de datos 
+        
         $nombrepdf= $dt->format('Y_m_d_H_i_s').str_replace(' ','-',$nombre_cliente).'.pdf';
         $setpdf = setpdf::create(
             [
                 'clientes'=>$request['cliente'],
                 'users'=>$users,
                 'pdf'=>$nombrepdf,
+                'empresas'=>$empresa
             ]
             );
         
@@ -59,6 +64,7 @@ class SetpdfController extends Controller
             'foto'=>$request['financiero_vehiculo_foto'],
             'marca'=>$request['financiero_vehiculo_marca_nombre'],
             'modelo'=>$request['financiero_vehiculo_modelo_nombre'],
+            'empresas'=>$empresa
         ]);
         $asesorios = $request['financiero_asesorios'];
         if($asesorios)
@@ -70,6 +76,7 @@ class SetpdfController extends Controller
                     'marca'=>$asesorio['marca'],
                     'estado'=>$asesorio['estado'],
                     'valor'=>$asesorio['valor'],
+                    'empresas'=>$empresa
                 ]);
             }
         }
@@ -89,6 +96,7 @@ class SetpdfController extends Controller
             'resolucionpension'=>$request['documentacion_pension'],
             'desprendibles'=>$request['documentacion_desprendibles'],
             'certificadotradiccion'=>$request['documentacion_certificado'],
+            'empresas'=>$empresa
         ]);
         $matricula = pdfmatricula::create([
             'setpdf'=>$llave,
@@ -98,6 +106,7 @@ class SetpdfController extends Controller
             'pignoracion'=>$request['matricula_pignoracion'],
             'certificadotradiccion'=>$request['matricula_certificado_tradiccion'],
             'siginperitaje'=>$request['matricula_cijin'],
+            'empresas'=>$empresa
         ]);
         $retoma = pdfretoma::create([
             'setpdf'=>$llave,
@@ -108,8 +117,12 @@ class SetpdfController extends Controller
             'kilometraje'=>$request['retoma_kilometraje'],
             'valorcomercial'=>$request['retoma_valor'],
             'descripcion'=>$request['retoma_descripcion'],
+            'empresas'=>$empresa
         ]);
-        $pdf = PDF::loadView('pdf',['foto'=>$request['financiero_vehiculo_foto'],
+        $pdf = PDF::loadView('pdf',['foto1'=>$vehiculo->foto1,
+                                    'foto2'=>$vehiculo->foto2,
+                                    'foto3'=>$vehiculo->foto3,
+                                    'foto4'=>$vehiculo->foto4,
                                     'asesorios'=>$asesorios,
                                     'placa'=>$request['financiero_vehiculo_placa'],
                                     'kilometraje'=>$request['financiero_vehiculo_kilometraje'],
@@ -152,7 +165,6 @@ class SetpdfController extends Controller
                                     'fotoperfil'=>$fotousuario,
                                     'fecha'=>$fecha,
                                     'empresa'=>$usuarioempresa,
-
                                 ]);
         $pdf->save(public_path().'/storage/documentos/'.str_replace(' ','-',$nombrepdf))->stream('pdf');
         // return $pdf->stream();

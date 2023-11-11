@@ -17,6 +17,7 @@ class asesorio extends Model
         'descripcion',
         'foto1',
         'foto2',
-        'foto3'
+        'foto3',
+        'empresas'
     ];
 }

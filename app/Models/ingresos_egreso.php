@@ -21,6 +21,7 @@ class ingresos_egreso extends Model
         'tiene_vehiculo',
         'total_pasivos',
         'pdf',
+        'empresas'
         
     ];
 }

@@ -15,5 +15,6 @@ class pdfasesorios extends Model
         'marca',
         'estado',
         'valor',
+        'empresas'
     ];
 }

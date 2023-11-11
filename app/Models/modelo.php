@@ -10,6 +10,7 @@ class modelo extends Model
     use HasFactory;
     protected $fillable=[
         'year'
+        ,'empresas'
     ];
 
     public function vehiculos()

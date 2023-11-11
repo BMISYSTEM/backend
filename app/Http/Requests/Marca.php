@@ -22,7 +22,7 @@ class Marca extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre'=>['required','unique:marcas,nombre']
+            'nombre'=>['required']
         ];
     }
     public function messages()

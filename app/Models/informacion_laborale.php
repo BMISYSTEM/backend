@@ -18,7 +18,8 @@ class informacion_laborale extends Model
         'profecion',
         'telefono',
         'antiguedad',
-        'pdf',
+        'pdf'
+        ,'empresas'
         
     ];
 }

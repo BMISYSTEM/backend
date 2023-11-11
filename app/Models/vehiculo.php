@@ -20,7 +20,8 @@ class vehiculo extends Model
         'modelos',
         'estados',
         'valor',
-        'peritaje',
+        'peritaje'
+        ,'empresas'
 
     ];
 
